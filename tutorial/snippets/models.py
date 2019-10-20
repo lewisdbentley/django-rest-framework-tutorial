@@ -14,7 +14,7 @@ class Snippet(models.Model):
     """
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(default='', blank=True, max_length=100)
-    owner = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    owner = models.ForeignKey('auth.User', related_name="snippets", on_delete=models.CASCADE)
     code = models.TextField()
     highlighted = models.TextField()
     linenos = models.BooleanField(default=False)
