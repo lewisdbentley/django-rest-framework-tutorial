@@ -8,17 +8,17 @@ class SnippetSerializer(serializers.HyperlinkedModelSerializer):
     Serialize and deserialize snippet instances into representations such as json.
     """
     owner = serializers.ReadOnlyField(source='owner.username')
-    highlight = serializers.HyperlinkedIdentityField(view_name="snippet-highlight", format="html")
+    highlighted = serializers.HyperlinkedIdentityField(view_name="snippet-highlight", format="html")
 
     class Meta:
         """
         Specify the model and fields.
         """
         model = Snippet
-        fields = ['url', 'id', 'title', 'code', 'linenos', 'language', 'style', 'owner', 'highlight']
+        fields = ['url', 'id', 'title', 'code', 'linenos', 'language', 'style', 'owner', 'highlighted']
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    snippets = serializers.HyperlinkedRelatedField(many=True, view_name="detail-view", read_only=True)
+    snippets = serializers.HyperlinkedRelatedField(many=True, view_name="snippet-detail", read_only=True)
 
     class Meta:
         model = User
